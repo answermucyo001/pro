@@ -3,6 +3,7 @@ services:
   - type: web
     name: mucyo-portfolio
     runtime: static
+    rootDir: fronted
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     routes:
@@ -20,19 +21,11 @@ services:
     plan: free
     rootDir: server
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
-      - key: DB_HOST
-        sync: false
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_NAME
+      - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET
         sync: false

@@ -1,10 +1,8 @@
--- Create database if not exists
-CREATE DATABASE IF NOT EXISTS mucyo_portfolio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE mucyo_portfolio;
+-- Create tables (PostgreSQL syntax)
 
 -- Admins table
 CREATE TABLE IF NOT EXISTS admins (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   username VARCHAR(100) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -12,7 +10,7 @@ CREATE TABLE IF NOT EXISTS admins (
 
 -- Profile table
 CREATE TABLE IF NOT EXISTS profile (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   title VARCHAR(150) NOT NULL,
   secondary VARCHAR(150) NOT NULL,
@@ -25,26 +23,26 @@ CREATE TABLE IF NOT EXISTS profile (
   linkedin VARCHAR(255),
   form_endpoint VARCHAR(255),
   image VARCHAR(255) DEFAULT '/mucyo.JPG',
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Projects table
 CREATE TABLE IF NOT EXISTS projects (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
   kind VARCHAR(100) NOT NULL,
   description TEXT NOT NULL,
-  technologies TEXT NOT NULL, -- comma separated or JSON
-  github VARCHAR(255),
-  demo VARCHAR(255),
-  image VARCHAR(255),
-  featured TINYINT(1) DEFAULT 1,
+  technologies TEXT NOT NULL DEFAULT '[]',
+  github VARCHAR(255) DEFAULT '',
+  demo VARCHAR(255) DEFAULT '',
+  image VARCHAR(255) DEFAULT '',
+  featured SMALLINT DEFAULT 1,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Skills table
 CREATE TABLE IF NOT EXISTS skills (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   group_name VARCHAR(100) NOT NULL,
   item_name VARCHAR(100) NOT NULL,
   display_order INT DEFAULT 0
@@ -52,11 +50,11 @@ CREATE TABLE IF NOT EXISTS skills (
 
 -- Education table
 CREATE TABLE IF NOT EXISTS education (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   period VARCHAR(100) NOT NULL,
   title VARCHAR(150) NOT NULL,
   institution VARCHAR(150) NOT NULL,
   location VARCHAR(100) NOT NULL,
   description TEXT NOT NULL,
-  topics TEXT NOT NULL -- comma separated
+  topics TEXT NOT NULL DEFAULT '[]'
 );
