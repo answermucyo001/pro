@@ -9,9 +9,10 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-export default function Hero() {
+export default function Hero({ profile }) {
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
+  const avatarImage = profile?.image || "/mucyo.JPG";
 
   useEffect(() => {
     if (reduce) return undefined;
@@ -28,8 +29,16 @@ export default function Hero() {
       animate="show"
       transition={{ staggerChildren: 0.12, delayChildren: 0.15 }}
     >
-      <motion.p variants={item} className="hero-hi">Hi, I&apos;m Mucyo.</motion.p>
-      <motion.h1 variants={item}>Software Development Student &amp; Creative Artist.</motion.h1>
+      <div className="hero-top-row">
+        <motion.div variants={item} className="hero-avatar-wrapper">
+          <img src={avatarImage} alt={profile?.name || "Mucyo Answer"} className="hero-avatar" />
+        </motion.div>
+        <div className="hero-text-content">
+          <motion.p variants={item} className="hero-hi">Hi, I&apos;m {profile?.name || "Mucyo Answer"}.</motion.p>
+          <motion.h1 variants={item}>Software Development  &amp; Creative Artist.</motion.h1>
+        </div>
+      </div>
+
       <motion.p variants={item} className="hero-role">
         <span className="sr-only">I make web apps, IoT systems, clean interfaces, and drawings and art.</span>
         <span aria-hidden="true">

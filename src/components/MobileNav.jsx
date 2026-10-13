@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { site, sections } from "../data/site.js";
-import { MenuIcon, CloseIcon } from "./Icons.jsx";
+import { MenuIcon, CloseIcon, SunIcon, MoonIcon } from "./Icons.jsx";
 import SocialLinks from "./SocialLinks.jsx";
 
-export default function MobileNav({ active }) {
+export default function MobileNav({ active, theme, toggleTheme }) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef(null);
   const toggleRef = useRef(null);
@@ -30,9 +30,18 @@ export default function MobileNav({ active }) {
     <div className="mobile-nav">
       <div className="mobile-bar">
         <a href="#top" className="brand-mobile">{site.name.toUpperCase()}</a>
-        <button ref={toggleRef} className="icon-btn" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
-          <MenuIcon />
-        </button>
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <button
+            className="icon-btn"
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button ref={toggleRef} className="icon-btn" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
+            <MenuIcon />
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

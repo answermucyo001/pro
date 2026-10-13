@@ -7,7 +7,10 @@ const L = ({ href, children }) => (
   <a className="link" href={href} target="_blank" rel="noreferrer noopener">{children}</a>
 );
 
-export default function About() {
+export default function About({ profile }) {
+  const avatarImage = profile?.image || "/mucyo.JPG";
+  const profileName = profile?.name || "Mucyo Answer";
+
   return (
     <Section id="about" title="About">
       <p>
@@ -28,6 +31,10 @@ export default function About() {
         both are about turning an idea into something people can see and use.
       </p>
       <div className="about-photos">
+        <figure className="profile-figure">
+          <img src={avatarImage} alt={profileName} width="350" height="230" style={{ width: "100%", aspectRatio: "3 / 2", objectFit: "cover" }} />
+          <figcaption>{profileName}</figcaption>
+        </figure>
         <figure>
           <RemoteImage src={photo("photo-1517694712202-14dd9538aa97")} alt="Laptop with code on screen" width="350" height="230" />
           <figcaption>Code</figcaption>

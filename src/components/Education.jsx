@@ -1,13 +1,14 @@
 import Section from "./Section.jsx";
 import TechTag from "./TechTag.jsx";
-import { education } from "../data/education.js";
+import { education as fallbackEducation } from "../data/education.js";
 
-export default function Education() {
+export default function Education({ data }) {
+  const educationList = data && data.length > 0 ? data : fallbackEducation;
   return (
     <Section id="education" title="Education">
       <ol className="timeline">
-        {education.map((e) => (
-          <li key={`${e.institution}-${e.title}`} className="timeline-item">
+        {educationList.map((e) => (
+          <li key={`${e.institution}-${e.title}-${e.id || 0}`} className="timeline-item">
             <p className="period">{e.period}</p>
             <div>
               <h3>{e.title} · {e.institution}</h3>

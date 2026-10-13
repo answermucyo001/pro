@@ -17,14 +17,12 @@ export const site = {
     formEndpoint: "",
   },
 };
-
 export const sections = [
   { id: "about", label: "About" },
   { id: "education", label: "Education" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "iot", label: "IoT" },
-  { id: "artwork", label: "Artwork" },
-  { id: "learning", label: "Learning" },
+  { id: "elearning", label: "E-Learning" },
   { id: "contact", label: "Contact" },
 ];
